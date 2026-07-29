@@ -73,3 +73,101 @@
 #include <cmath>
 using namespace std;
 
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b, bool& valid) {
+    if (b == 0) {
+        valid = false;
+        return 0;
+    }
+    valid = true;
+    return a / b;
+}
+
+double computeModulus(int a, int b, bool& valid) {
+    if (b == 0) {
+        valid = false;
+        return 0;
+    }
+    valid = true;
+    return a % b;
+}
+
+double exponentiate(double a, double b) {
+    return pow(a, b);
+}
+
+int main() {
+    while (true) {
+        cout << "==============================" << endl;
+        cout << "    SIMPLE CALCULATOR" << endl;
+        cout << "==============================" << endl;
+        cout << "1. Addition" << endl;
+        cout << "2. Subtraction" << endl;
+        cout << "3. Multiplication" << endl;
+        cout << "4. Division" << endl;
+        cout << "5. Modulus" << endl;
+        cout << "6. Exponentiation" << endl;
+        cout << "7. Quit" << endl;
+        cout << "Select an operation (1-7): ";
+
+        int choice;
+        cin >> choice;
+
+        if (choice == 7) {
+            cout << "Goodbye!" << endl;
+            break;
+        } else if (choice >= 1 && choice <= 6) {
+            double num1, num2;
+            cout << "Enter first number : ";
+            cin >> num1;
+            cout << "Enter second number: ";
+            cin >> num2;
+
+            bool valid;
+
+            if (choice == 1) {
+                double result = add(num1, num2);
+                cout << "Result: " << num1 << " + " << num2 << " = " << result << endl;
+            } else if (choice == 2) {
+                double result = subtract(num1, num2);
+                cout << "Result: " << num1 << " - " << num2 << " = " << result << endl;
+            } else if (choice == 3) {
+                double result = multiply(num1, num2);
+                cout << "Result: " << num1 << " * " << num2 << " = " << result << endl;
+            } else if (choice == 4) {
+                double result = divide(num1, num2, valid);
+                if (!valid) {
+                    cout << "Error: Cannot divide by zero." << endl;
+                } else {
+                    cout << fixed << setprecision(2);
+                    cout << "Result: " << num1 << " / " << num2 << " = " << result << endl;
+                }
+            } else if (choice == 5) {
+                double result = computeModulus((int)num1, (int)num2, valid);
+                if (!valid) {
+                    cout << "Error: Cannot divide by zero." << endl;
+                } else {
+                    cout << "Result: " << (int)num1 << " % " << (int)num2 << " = " << (int)result << endl;
+                }
+            } else if (choice == 6) {
+                double result = exponentiate(num1, num2);
+                cout << "Result: " << num1 << " ^ " << num2 << " = " << result << endl;
+            }
+        } else {
+            cout << "Error: Invalid choice. Please select a number from 1 to 7." << endl;
+        }
+    }
+
+    return 0;
+}
